@@ -6,6 +6,7 @@ export const Recipes = ({ recipe }) => {
  
   return (
     <>
+    if ()
      <Url href = {recipe.recipe.url} target="_blank">
       <Card>
         <Img src={recipe.recipe.image} />
