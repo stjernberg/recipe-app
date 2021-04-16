@@ -9,22 +9,31 @@ export const Pagination = ({ recipePerPage, totalRecipes, paginate }) => {
   }
 
   return (
-    <Nav>
-      <ul className='pagination'>
-        {pageNumbers.map(number => (
-          <li key={number} className='page-item'>
-            <a onClick={() => paginate(number)} href='!#' className='page-link'>
-              {number}
-            </a>
-          </li>
-        ))}
 
-      </ul>
-    </Nav>
+    <Wrapper>
+      <Nav>
+        <ul className='pagination'>
+          {pageNumbers.map(number => (
+            <li key={number} className='page-item'>
+              <a onClick={() => paginate(number)} href='!#' className='page-link'>
+                {number}
+              </a>
+            </li>
+          ))}
+
+        </ul>
+      </Nav>
+    </Wrapper>
   )
 }
 
-const Nav=styled.nav`
+const Wrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  width: 100%;
+`
+const Nav = styled.nav`
+
+  margin-top: 50px;
   bottom: 0;
-  margin-top: 150px;
 `
