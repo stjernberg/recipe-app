@@ -5,8 +5,10 @@ import Axios from 'axios'
 
 import { YOUR_APP_ID, YOUR_APP_KEY } from './key'
 // import Food from './assets/paella.jpg'
-import { Recipes } from './pages/Recipes'
-import { Options } from './components/Options'
+import { Recipes } from './components/Recipes'
+import { Nav } from './components/Nav'
+// import { Options } from './components/Options'
+// import { Pagination } from './components/Pagination';
 
 const App = () => {
 
@@ -14,20 +16,25 @@ const App = () => {
   const [search, setSearch] = useState("")
   const [query, setQuery] = useState("chicken")
   const [recipes, setRecipes] = useState([])
-  const [healthLabel, setHealthLabel] = useState("")
-  const START_URL = `https://api.edamam.com/search?q=chicken&app_id=${YOUR_APP_ID}&app_key=${YOUR_APP_KEY}&from=0&to=30`
-  const URL = `https://api.edamam.com/search?q=${query}&app_id=${YOUR_APP_ID}&app_key=${YOUR_APP_KEY}&from=0&to=30&`
+  // const [mealType, setMealType] = useState("Dinner")
+  const [loading, setLoading] = useState(false)
+  // const [currentPage, setCurrentPage] = useState(1)
+  // const [recipePerPage, setRecipePerPage] = useState(12)
+  const URL = `https://api.edamam.com/search?q=${query}&app_id=${YOUR_APP_ID}&app_key=${YOUR_APP_KEY}&from=0&to=36`
 
-  // &health=${healthLabel}
+  // &mealType=${mealType}
+  // &healthLabel=${healthLabel}
   useEffect(() => {
     getRecipes()
-    
+
   }, [query])
 
   const getRecipes = async () => {
+    setLoading(true)
     const result = await Axios.get(URL)
     setRecipes(result.data.hits)
     console.log(result.data.hits)
+    setLoading(false)
   }
 
   const getSearch = (e) => {
@@ -36,39 +43,41 @@ const App = () => {
     setSearch("")
   }
 
+  // const indexOfLastRecipe = currentPage * recipePerPage;
+  // const indexOfFirstRecipe = indexOfLastRecipe - recipePerPage;
+  // const currentRecipes = recipes.slice(indexOfFirstRecipe, indexOfLastRecipe);
+
+  // const paginate = pageNumber => setCurrentPage(pageNumber);
+
+
   return (
     <>
-    <Heading>
-        <Title>Tasty Food Recipes </Title>
-   
-      <Form onSubmit={getSearch}>
-        <Input type="text"
-          placeholder="Enter ingredient"
-          value={search}
-          onChange={(e) => setSearch(e.target.value)} />
-        <Button type="submit">Search</Button>
-
-        <Options setHealthLabel={setHealthLabel} />
-
-      </Form>
-      </Heading>
-    <PageWrapper>
+     <Nav getSearch={getSearch} setSearch={setSearch}  /> 
+          {/* <Options setMealType={setMealType} /> */}     
       
-      <CardsContainer>
-        {recipes !== [] &&
-          recipes.map((recipe, index) => (
-                <Recipes
+      <PageWrapper>
+       <CardsContainer>
+          {/* {loading && <h1>Loading...</h1>} */}
+          {recipes !== [] &&
+            recipes.map((recipe, index) => (
+              <Recipes
                 key={index}
                 recipe={recipe}
+                loading={loading}
               />
-           
-          ))}
-      </CardsContainer>
 
-    </PageWrapper>
+            ))}
+        </CardsContainer>
+{/*        
+        <Pagination
+          recipePerPage={recipePerPage}
+          totalRecipes={recipes.length}
+          paginate={paginate} /> */}   
+        </PageWrapper> 
     </>
   );
 }
+
 
 
 const CardsContainer = styled.div`
@@ -77,6 +86,7 @@ const CardsContainer = styled.div`
   flex-wrap: wrap;
   width: 80%;
   justify-content: center;
+  height: 100vh;
 `
 
 const PageWrapper = styled.div`
@@ -84,49 +94,10 @@ const PageWrapper = styled.div`
   flex-direction: column;
   align-items: center;
   font-family: 'Roboto', sans-serif;
-`
-// const Img = styled.img`
-//   width: 120px;
-//   margin-left: 10px;
-// `
-
-const Heading = styled.header`
-  display: flex;
-  justify-content: space-between;
-  width: 90%;
   
+  /* height: 100vw;  */
 `
-const Form = styled.form`
-  display: flex;
-  margin-top: 20px;
-  height: 40px;
- 
-`
-const Input = styled.input`
-  display: flex;
-  padding: 8px 10px;
-  /* height: 15px; */
-  border-radius: 5px;
-  margin-right: 5px;
-  border: 2px solid #a3c1ad;
-`
-const Button = styled.button`
- background: #a3c1ad;
- color: #fff;
- width: 65px;
- /* height: 15px; */
- font-size: 15px;
- border-radius: 5px;
- border: none;
- &:hover {
-    cursor: pointer;
-    background: #738678;
-  }
-`
-const Title = styled.h1`
- font-family: 'Poppins', sans-serif;
- margin-left: 50px;
-`
+
 
 
 export default App

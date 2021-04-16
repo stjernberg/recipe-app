@@ -3,18 +3,20 @@ import React from 'react'
 import styled from "styled-components/macro"
 
 export const Recipes = ({ recipe }) => {
- 
+
+  
   return (
-    <>
-    if ()
-     <Url href = {recipe.recipe.url} target="_blank">
-      <Card>
-        <Img src={recipe.recipe.image} />
-        <Text>{recipe.recipe.label}</Text>
-      </Card>
-      </Url>
-    </>
- 
+        recipe.recipe.image.match(/\.(jpeg|jpg|gif|png)$/) != null && (
+      <>
+     
+        <Url href={recipe.recipe.url} target="_blank">
+          <Card>
+            <Img src={recipe.recipe.image} />
+            <Text>{recipe.recipe.label}</Text>
+          </Card>
+        </Url>
+      </>
+    )
   )
 }
 

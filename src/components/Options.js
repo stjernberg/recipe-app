@@ -2,31 +2,24 @@ import React from 'react'
 
 import styled from 'styled-components/macro'
 
-export const Options = ( {setHealthLabel} ) => {
+export const Options = ( {setMealType} ) => {
 
- 
   return(
-  <HealthLabels
-    onChange={e => setHealthLabel(e.target.value)}
-  >
-    <option value="">Health Labels</option>
-    <option value="vegan">Vegan</option>
-    <option value="vegetarian">vegetarian</option>
-    <option value="dairy-free">Dairy-free</option>
-    <option value="gluten-free">Gluten-free</option>
-    <option value="low-sugar">Low-sugar</option>
-    <option value="peanut-free">Peanut-free</option>
-    <option value="egg-free">Egg-free</option>
-    <option value="fat-free">Fat-free</option>
-    <option value="wheet-free">Fat-free</option>
-  </HealthLabels>
+  <MealType onChange={e => setMealType(e.target.value)} >
+    <option value="">Meal type</option>
+    <option value="Breakfast">Breakfast</option>
+    <option value="Lunch">Lunch</option>
+    <option value="Dinner">Dinner</option>
+    <option value="Snack">Snack</option>
+    <option value="Tea-time">Tea-time</option>  
+ </MealType>
   )
 }
 
 // const Option = styled.option`
 //   font-weight: bold;
 //   `
-const HealthLabels = styled.select`
+const MealType = styled.select`
   width: 150px;
   /* height: 15px; */
   border: 2px solid #a3c1ad;
