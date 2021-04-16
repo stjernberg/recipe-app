@@ -21,7 +21,7 @@ const App = () => {
   const [currentPage, setCurrentPage] = useState(1)
   // const [recipePerPage, setRecipePerPage] = useState(12)
   const recipePerPage = 12
-  const URL = `https://api.edamam.com/search?q=${query}&app_id=${YOUR_APP_ID}&app_key=${YOUR_APP_KEY}&from=0&to=36`
+  const URL = `https://api.edamam.com/search?q=${query}&app_id=${YOUR_APP_ID}&app_key=${YOUR_APP_KEY}&from=0&to=120`
 
   // &mealType=${mealType}
   // &healthLabel=${healthLabel}
